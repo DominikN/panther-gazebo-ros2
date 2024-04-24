@@ -1,0 +1,12 @@
+services:
+  panther:
+    image: husarion/panther-gazebo:humble-2.0.0-20240416
+    runtime: ${DOCKER_RUNTIME:-runc}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY:?err}
+      - LIBGL_ALWAYS_SOFTWARE=${LIBGL_ALWAYS_SOFTWARE:-1}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    command: ros2 launch panther_gazebo simulation.launch.py
